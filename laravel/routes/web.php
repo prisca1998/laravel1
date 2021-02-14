@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserAuthe;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post("user",[UserAuthe::class,'userLogin']);
+Route::view("login",'login');
+Route::view("profile",'profile');
+
+Route::get('/logout', function () {
+    if(session()->has('user'))
+    {
+        session()->pull('user');
+    }
+    return  redirect('login');
+});
+
+
+
